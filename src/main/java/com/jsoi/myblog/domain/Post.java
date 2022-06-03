@@ -22,7 +22,7 @@ public class Post extends TimeStamped {
     @Column(nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     List<Comment> commentList = new ArrayList<>();
 
     public Post(PostRequestDto postRequestDto) {
@@ -37,7 +37,8 @@ public class Post extends TimeStamped {
         this.content = postRequestDto.getContent();
     }
 
-    public void addComment(CommentRequestDto commentRequestDto) {
+    public void addComment(CommentRequestDto commentRequestDto){
         this.commentList.add(new Comment(commentRequestDto));
     }
+
 }

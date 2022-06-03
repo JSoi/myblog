@@ -19,10 +19,10 @@ public class PostService {
         return newPost.getId();
     }
 
-
     @Transactional
-    public void addComment(Long id, CommentRequestDto commentRequestDto){
-        Post targetPost = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 포스트가 존재하지 않습니다"));
-        targetPost.getCommentList().add(new Comment(commentRequestDto));
+    public void addComment(Long id, CommentRequestDto commentRequestDto) {
+
     }
+
+
 }

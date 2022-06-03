@@ -1,5 +1,6 @@
 package com.jsoi.myblog.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
