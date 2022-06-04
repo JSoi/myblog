@@ -16,12 +16,7 @@ public class PostService {
     public Long update(Long id, PostRequestDto postRequestDto) {
         Post newPost = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 포스트가 존재하지 않습니다"));
         newPost.update(postRequestDto);
-        return newPost.getId();
-    }
-
-    @Transactional
-    public void addComment(Long id, CommentRequestDto commentRequestDto) {
-
+        return newPost.getPostId();
     }
 
 

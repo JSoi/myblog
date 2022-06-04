@@ -20,11 +20,10 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment addComment(Long id, CommentRequestDto commentRequestDto) {
-        // 1 . Post Id를 기반으로 하여 해당 포스트를 찾고, 댓글 list에 더해준다
-        Post targetPost = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 포스트가 존재하지 않습니다"));
-        Comment myComment = new Comment(commentRequestDto);
-        targetPost.getCommentList().add(myComment);
-        return myComment;
+    public Comment addComment(Long postId, CommentRequestDto commentRequestDto) {
+        Post commentPost = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 ID의 포스트를 찾을 수 없어 댓글 추가가 종료됩니다"));
+        Comment newComment = new Comment(commentRequestDto);
+        newComment.addCommentPost(commentPost);
+        return commentRepository.save(newComment);
     }
 }
