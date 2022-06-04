@@ -26,4 +26,11 @@ public class CommentService {
         newComment.addCommentPost(commentPost);
         return commentRepository.save(newComment);
     }
+
+    @Transactional
+    public Long updateComment(Long commentId, CommentRequestDto commentRequestDto) {
+        Comment targetComement = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("commentID를 찾을 수 없습니다"));
+        targetComement.update(commentRequestDto);
+        return commentId;
+    }
 }

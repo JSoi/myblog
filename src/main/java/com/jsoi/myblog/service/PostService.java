@@ -19,5 +19,4 @@ public class PostService {
         return newPost.getPostId();
     }
 
-
 }
