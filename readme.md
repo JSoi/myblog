@@ -63,19 +63,19 @@ modifiedAt
 
 
 
-| 기능           | Method | Endpoint                       | return |
-| -------------- | ------ | ------------------------------ | ------ |
-| 전체게시물목록 | GET    | /posts                         |        |
-| 게시글작성     | POST   | /posts                         |        |
-| 게시글조회     | GET    | /posts/{postId}                |        |
-| 게시글수정     | PUT    | /posts/{postId}                |        |
-| 게시글삭제     | DELETE | /posts/{postId}                |        |
-| 댓글목록조회   | GET    | /{postId}/comments             |        |
-| 댓글 작성      | POST   | /{postId}/comments             |        |
-| 댓글 수정      | PUT    | /{postId}/comments/{commentId} |        |
-| 댓글 삭제      | DELETE | /{postId}/comments/{commentId} |        |
-|                |        |                                |        |
-|                |        |                                |        |
+| 기능           | Method | Endpoint              | return |
+| -------------- | ------ |-----------------------| ------ |
+| 전체게시물목록 | GET    | /posts                |        |
+| 게시글작성     | POST   | /posts                |        |
+| 게시글조회     | GET    | /posts/{postId}       |        |
+| 게시글수정     | PUT    | /posts/{postId}       |        |
+| 게시글삭제     | DELETE | /posts/{postId}       |        |
+| 댓글목록조회   | GET    | /{postId}/comments    |        |
+| 댓글 작성      | POST   | /{postId}/comments    |        |
+| 댓글 수정      | PUT    | /comments/{commentId} |        |
+| 댓글 삭제      | DELETE | /comments/{commentId} |        |
+|                |        |                       |        |
+|                |        |                       |        |
 
 ** 게시물을 삭제했을 때, 댓글 역시 삭제되어야 한다.
 
