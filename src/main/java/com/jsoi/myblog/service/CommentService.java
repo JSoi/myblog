@@ -19,7 +19,7 @@ public class CommentService {
 
     @Transactional
     public Comment addComment(Long postId, CommentRequestDto commentRequestDto) {
-        Post commentPost = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 ID의 포스트를 찾을 수 없어 댓글 추가가 종료됩니다"));
+        Post commentPost = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 PostID를 찾을 수 없어 댓글 추가가 종료됩니다"));
         Comment newComment = new Comment(commentRequestDto);
         newComment.addCommentPost(commentPost);
         return commentRepository.save(newComment);
@@ -27,14 +27,14 @@ public class CommentService {
 
     @Transactional
     public Long updateComment(Long commentId, CommentRequestDto commentRequestDto) {
-        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("commentID를 찾을 수 없습니다"));
+        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 CommentID를 찾을 수 없어 수정을 실행하지 않습니다"));
         targetComment.update(commentRequestDto);
         return commentId;
     }
 
     @Transactional
     public void deleteById(Long commentId) {
-        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 CommetID를 찾을 수 없어 삭제가 취소됩니다"));
+        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 CommentID를 찾을 수 없어 삭제가 취소됩니다"));
         commentRepository.deleteById(commentId);
     }
 
