@@ -36,12 +36,5 @@ public class Comment extends TimeStamped {
         this.author = commentRequestDto.getAuthor();
         this.content = commentRequestDto.getContent();
     }
-    public void setPost(Post post){
-        if (this.post!=null){
-            this.post.getCommentList().remove(this);
-        }
-        this.post = post;
-        post.getCommentList().add(this);
-    }
 
 }

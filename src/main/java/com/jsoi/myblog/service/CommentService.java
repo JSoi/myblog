@@ -12,12 +12,6 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
 
-    @Transactional
-    public Long update(Long id, CommentRequestDto commentRequestDto) {
-        Comment newComment = commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 코멘트를 찾을 수 없습니다"));
-        newComment.update(commentRequestDto);
-        return id;
-    }
 
     @Transactional
     public Comment addComment(Long postId, CommentRequestDto commentRequestDto) {
@@ -29,8 +23,14 @@ public class CommentService {
 
     @Transactional
     public Long updateComment(Long commentId, CommentRequestDto commentRequestDto) {
-        Comment targetComement = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("commentID를 찾을 수 없습니다"));
-        targetComement.update(commentRequestDto);
+        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("commentID를 찾을 수 없습니다"));
+        targetComment.update(commentRequestDto);
         return commentId;
+    }
+
+    @Transactional
+    public void deleteById(Long commentId) {
+        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 CommetID를 찾을 수 없어 삭제가 취소됩니다"));
+        commentRepository.deleteById(commentId);
     }
 }

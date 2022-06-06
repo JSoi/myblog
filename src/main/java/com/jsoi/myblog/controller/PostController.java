@@ -19,8 +19,15 @@ public class PostController {
 
     @GetMapping("/posts")
     public List<Post> getPost() {
-        return postRepository.findAll();
+        return postRepository.findAllByOrderByCreatedAtDesc();
     }
+
+
+    @GetMapping("/posts/{postId}")
+    public Post getSpecificPost(@PathVariable Long postId) {
+        return postService.findById(postId);
+    }
+
 
     @PostMapping("/posts")
     public Post createPost(@RequestBody PostRequestDto postRequestDto) {

@@ -18,5 +18,9 @@ public class PostService {
         newPost.update(postRequestDto);
         return newPost.getPostId();
     }
+    @Transactional
+    public Post findById(Long postId) {
+        return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 포스트가 존재하지 않습니다"));
+    }
 
 }

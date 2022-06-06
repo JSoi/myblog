@@ -26,6 +26,7 @@ public class Post extends TimeStamped {
     private String content;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    @OrderBy("createdAt DESC")
     List<Comment> commentList = new ArrayList<>();
 
     public Post(PostRequestDto postRequestDto) {
@@ -38,13 +39,6 @@ public class Post extends TimeStamped {
         this.title = postRequestDto.getTitle();
         this.author = postRequestDto.getAuthor();
         this.content = postRequestDto.getContent();
-    }
-
-    public void addComment(Comment comment){
-        this.getCommentList().add(comment);
-        if(comment.getPost()!=this) {
-            comment.setPost(this);
-        }
     }
 
 }
