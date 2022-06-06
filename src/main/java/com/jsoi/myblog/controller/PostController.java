@@ -18,7 +18,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public List<Post> getPost() {
-        return postRepository.findAllByOrderByCreatedAtDesc();
+        return postService.getAll();
     }
 
 
@@ -30,7 +30,7 @@ public class PostController {
 
     @PostMapping("/posts")
     public Post createPost(@RequestBody PostRequestDto postRequestDto) {
-        return postRepository.save(new Post(postRequestDto));
+        return postService.create(postRequestDto);
     }
 
     @PutMapping("/posts/{postId}")
@@ -40,7 +40,7 @@ public class PostController {
 
     @DeleteMapping("/posts/{postId}")
     public Long deletePost(@PathVariable Long postId) {
-        postRepository.deleteById(postId);
+        postService.delete(postId);
         return postId;
     }
 }
