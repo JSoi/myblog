@@ -8,7 +8,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RequestException extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EmptyException.class)
     protected ExceptionMessage handleDataException(EmptyException emptyException) {
-        return new ExceptionMessage(emptyException.getCode().toString());
+        return new ExceptionMessage(emptyException.getCode().getDesc());
     }
 
 }
