@@ -1,6 +1,8 @@
 package com.jsoi.myblog.service;
 
 import com.jsoi.myblog.dto.CommentRequestDto;
+import com.jsoi.myblog.exception.EmptyException;
+import com.jsoi.myblog.exception.ErrorCode;
 import com.jsoi.myblog.model.Comment;
 import com.jsoi.myblog.model.Post;
 import com.jsoi.myblog.repository.CommentRepository;
@@ -19,23 +21,32 @@ public class CommentService {
 
     @Transactional
     public Comment addComment(Long postId, CommentRequestDto commentRequestDto) {
-        Post commentPost = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 PostID를 찾을 수 없어 댓글 추가가 종료됩니다"));
+        validateComment(commentRequestDto);
+        Post commentPost = postRepository.findById(postId).orElseThrow(() ->  new EmptyException(ErrorCode.INVALID_POST_ID));
         Comment newComment = new Comment(commentRequestDto);
         newComment.addCommentPost(commentPost);
         return commentRepository.save(newComment);
     }
 
+
     @Transactional
     public Long updateComment(Long commentId, CommentRequestDto commentRequestDto) {
-        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 CommentID를 찾을 수 없어 수정을 실행하지 않습니다"));
+        validateComment(commentRequestDto);
+        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new EmptyException(ErrorCode.INVALID_COMMENT_ID));
         targetComment.update(commentRequestDto);
         return commentId;
     }
 
     @Transactional
     public void deleteById(Long commentId) {
-        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 CommentID를 찾을 수 없어 삭제가 취소됩니다"));
+        commentRepository.findById(commentId).orElseThrow(() ->  new EmptyException(ErrorCode.INVALID_COMMENT_ID));
         commentRepository.deleteById(commentId);
     }
 
+
+    private void validateComment(CommentRequestDto commentRequestDto) {
+        if (commentRequestDto.getContent().equals("")) {
+            throw new EmptyException(ErrorCode.EMPTY_COMMENT_CONTENT);
+        }
+    }
 }

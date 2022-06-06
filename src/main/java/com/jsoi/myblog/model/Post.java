@@ -26,7 +26,7 @@ public class Post extends TimeStamped {
     @Column(nullable = false)
     private String content;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("createdAt DESC")
     List<Comment> commentList = new ArrayList<>();
 

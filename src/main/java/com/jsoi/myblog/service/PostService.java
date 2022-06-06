@@ -1,5 +1,7 @@
 package com.jsoi.myblog.service;
 
+import com.jsoi.myblog.exception.EmptyException;
+import com.jsoi.myblog.exception.ErrorCode;
 import com.jsoi.myblog.repository.*;
 import com.jsoi.myblog.dto.PostRequestDto;
 import com.jsoi.myblog.model.Post;
@@ -31,21 +33,19 @@ public class PostService {
 
     @Transactional
     public Long update(Long id, PostRequestDto postRequestDto) {
-        Post newPost = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 포스트가 존재하지 않습니다"));
+        Post newPost = postRepository.findById(id).orElseThrow(() -> new EmptyException(ErrorCode.INVALID_POST_ID));
         newPost.update(postRequestDto);
         return newPost.getPostId();
     }
 
     @Transactional
     public Post findById(Long postId) {
-        return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 포스트가 존재하지 않습니다"));
+        return postRepository.findById(postId).orElseThrow(() -> new EmptyException(ErrorCode.INVALID_POST_ID));
     }
 
     @Transactional
     public void delete(Long postId) {
-        if (findById(postId) == null) {
-            throw new IllegalArgumentException("해당 포스트가 존재하지 않습니다");
-        }
+        postRepository.findById(postId).orElseThrow(() -> new EmptyException(ErrorCode.INVALID_POST_ID));
         postRepository.deleteById(postId);
     }
 }
