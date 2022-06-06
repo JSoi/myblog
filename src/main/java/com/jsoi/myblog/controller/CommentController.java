@@ -1,12 +1,12 @@
 package com.jsoi.myblog.controller;
 
-import com.jsoi.myblog.domain.*;
+import com.jsoi.myblog.dto.CommentRequestDto;
+import com.jsoi.myblog.model.Comment;
+import com.jsoi.myblog.model.Post;
 import com.jsoi.myblog.service.CommentService;
 import com.jsoi.myblog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

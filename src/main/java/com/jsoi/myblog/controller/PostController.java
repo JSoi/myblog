@@ -1,9 +1,8 @@
 package com.jsoi.myblog.controller;
 
-import com.jsoi.myblog.domain.CommentRepository;
-import com.jsoi.myblog.domain.Post;
-import com.jsoi.myblog.domain.PostRepository;
-import com.jsoi.myblog.domain.PostRequestDto;
+import com.jsoi.myblog.model.Post;
+import com.jsoi.myblog.repository.PostRepository;
+import com.jsoi.myblog.dto.PostRequestDto;
 import com.jsoi.myblog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

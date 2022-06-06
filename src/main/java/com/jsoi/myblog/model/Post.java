@@ -1,7 +1,8 @@
-package com.jsoi.myblog.domain;
+package com.jsoi.myblog.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.jsoi.myblog.dto.PostRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

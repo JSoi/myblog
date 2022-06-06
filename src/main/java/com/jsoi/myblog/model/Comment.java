@@ -1,5 +1,6 @@
-package com.jsoi.myblog.domain;
+package com.jsoi.myblog.model;
 
+import com.jsoi.myblog.dto.CommentRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

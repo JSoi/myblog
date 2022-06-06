@@ -1,6 +1,10 @@
 package com.jsoi.myblog.service;
 
-import com.jsoi.myblog.domain.*;
+import com.jsoi.myblog.dto.CommentRequestDto;
+import com.jsoi.myblog.model.Comment;
+import com.jsoi.myblog.model.Post;
+import com.jsoi.myblog.repository.CommentRepository;
+import com.jsoi.myblog.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,4 +37,5 @@ public class CommentService {
         Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 CommetID를 찾을 수 없어 삭제가 취소됩니다"));
         commentRepository.deleteById(commentId);
     }
+
 }

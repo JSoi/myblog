@@ -1,6 +1,6 @@
-package com.jsoi.myblog.domain;
+package com.jsoi.myblog.repository;
 
-import lombok.NoArgsConstructor;
+import com.jsoi.myblog.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

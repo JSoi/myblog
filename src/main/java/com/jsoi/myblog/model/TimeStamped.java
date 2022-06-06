@@ -1,4 +1,4 @@
-package com.jsoi.myblog.domain;
+package com.jsoi.myblog.model;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

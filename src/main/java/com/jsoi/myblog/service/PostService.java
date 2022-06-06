@@ -1,6 +1,8 @@
 package com.jsoi.myblog.service;
 
-import com.jsoi.myblog.domain.*;
+import com.jsoi.myblog.repository.*;
+import com.jsoi.myblog.dto.PostRequestDto;
+import com.jsoi.myblog.model.Post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ public class PostService {
         newPost.update(postRequestDto);
         return newPost.getPostId();
     }
+
     @Transactional
     public Post findById(Long postId) {
         return postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("해당 포스트가 존재하지 않습니다"));

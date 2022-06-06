@@ -1,4 +1,4 @@
-package com.jsoi.myblog.domain;
+package com.jsoi.myblog.dto;
 
 import lombok.Getter;
 
