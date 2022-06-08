@@ -1,6 +1,7 @@
 package com.jsoi.myblog.model;
 
 import com.jsoi.myblog.dto.CommentRequestDto;
+import com.jsoi.myblog.valdation.Validator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,6 +26,7 @@ public class Comment extends TimeStamped {
     private String author;
 
     public Comment(CommentRequestDto commentRequestDto) {
+        Validator.validateComment(commentRequestDto);
         this.author = commentRequestDto.getAuthor();
         this.content = commentRequestDto.getContent();
     }
@@ -34,6 +36,7 @@ public class Comment extends TimeStamped {
     }
 
     public void update(CommentRequestDto commentRequestDto) {
+        Validator.validateComment(commentRequestDto);
         this.author = commentRequestDto.getAuthor();
         this.content = commentRequestDto.getContent();
     }

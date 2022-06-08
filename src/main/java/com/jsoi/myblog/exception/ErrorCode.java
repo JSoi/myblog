@@ -10,7 +10,10 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum ErrorCode {
     EMPTY_COMMENT_CONTENT("댓글의 내용을 입력해주세요"),
-    EMPTY_POST_COMMENT("게시글의 내용을 입력해주세요"),
+    EMPTY_POST_CONTENT("게시글의 내용을 입력해주세요"),
+    EMPTY_POST_TITLE("게시글의 제목을 입력해주세요"),
+    EMPTY_COMMENT_AUTHOR("댓글의 작성자를 입력해주세요"),
+    EMPTY_POST_AUTHOR("게시글의 작성자를 입력해주세요"),
     INVALID_POST_ID("유효하지 않은 게시물 ID 입니다"),
     INVALID_COMMENT_ID("유효하지 않은 댓글 ID 입니다");
     private final String desc;

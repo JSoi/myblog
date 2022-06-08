@@ -3,10 +3,10 @@ package com.jsoi.myblog.exception;
 import lombok.Getter;
 
 @Getter
-public class EmptyException extends RuntimeException {
+public class MyException extends RuntimeException {
     private ErrorCode code;
 
-    public EmptyException(ErrorCode code) {
+    public MyException(ErrorCode code) {
         super(code.getDesc());
         this.code = code;
     }

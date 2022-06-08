@@ -1,6 +1,6 @@
 package com.jsoi.myblog.service;
 
-import com.jsoi.myblog.exception.EmptyException;
+import com.jsoi.myblog.exception.MyException;
 import com.jsoi.myblog.exception.ErrorCode;
 import com.jsoi.myblog.repository.*;
 import com.jsoi.myblog.dto.PostRequestDto;
@@ -33,19 +33,19 @@ public class PostService {
 
     @Transactional
     public Long update(Long id, PostRequestDto postRequestDto) {
-        Post newPost = postRepository.findById(id).orElseThrow(() -> new EmptyException(ErrorCode.INVALID_POST_ID));
+        Post newPost = findById(id);
         newPost.update(postRequestDto);
         return newPost.getPostId();
     }
 
     @Transactional
     public Post findById(Long postId) {
-        return postRepository.findById(postId).orElseThrow(() -> new EmptyException(ErrorCode.INVALID_POST_ID));
+        return postRepository.findById(postId).orElseThrow(() -> new MyException(ErrorCode.INVALID_POST_ID));
     }
 
     @Transactional
     public void delete(Long postId) {
-        postRepository.findById(postId).orElseThrow(() -> new EmptyException(ErrorCode.INVALID_POST_ID));
+        findById(postId);
         postRepository.deleteById(postId);
     }
 }

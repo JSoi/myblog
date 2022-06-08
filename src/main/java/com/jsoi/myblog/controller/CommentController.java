@@ -7,6 +7,7 @@ import com.jsoi.myblog.service.CommentService;
 import com.jsoi.myblog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class CommentController {
     private final CommentService commentService;
     private final PostService postService;

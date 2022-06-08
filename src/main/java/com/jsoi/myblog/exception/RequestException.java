@@ -6,9 +6,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestControllerAdvice(basePackages = "com.jsoi.myblog.controller") // AOP 타겟이 되는 패키지를 설정
 public class RequestException extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(EmptyException.class)
-    protected ExceptionMessage handleDataException(EmptyException emptyException) {
-        return new ExceptionMessage(emptyException.getCode().getDesc());
+    @ExceptionHandler(MyException.class)
+    protected ExceptionMessage handleDataException(MyException myException) {
+        return new ExceptionMessage(myException.getCode().getDesc());
     }
 
 }

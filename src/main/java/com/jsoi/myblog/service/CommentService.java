@@ -1,8 +1,8 @@
 package com.jsoi.myblog.service;
 
 import com.jsoi.myblog.dto.CommentRequestDto;
-import com.jsoi.myblog.exception.EmptyException;
 import com.jsoi.myblog.exception.ErrorCode;
+import com.jsoi.myblog.exception.MyException;
 import com.jsoi.myblog.model.Comment;
 import com.jsoi.myblog.model.Post;
 import com.jsoi.myblog.repository.CommentRepository;
@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import static com.jsoi.myblog.valdation.Validator.validateComment;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +23,7 @@ public class CommentService {
 
     @Transactional
     public Comment addComment(Long postId, CommentRequestDto commentRequestDto) {
-        validateComment(commentRequestDto);
-        Post commentPost = postRepository.findById(postId).orElseThrow(() ->  new EmptyException(ErrorCode.INVALID_POST_ID));
+        Post commentPost = postRepository.findById(postId).orElseThrow(() -> new MyException(ErrorCode.INVALID_POST_ID));
         Comment newComment = new Comment(commentRequestDto);
         newComment.addCommentPost(commentPost);
         return commentRepository.save(newComment);
@@ -31,22 +32,21 @@ public class CommentService {
 
     @Transactional
     public Long updateComment(Long commentId, CommentRequestDto commentRequestDto) {
-        validateComment(commentRequestDto);
-        Comment targetComment = commentRepository.findById(commentId).orElseThrow(() -> new EmptyException(ErrorCode.INVALID_COMMENT_ID));
+        Comment targetComment = findCommentById(commentId);
         targetComment.update(commentRequestDto);
         return commentId;
     }
 
     @Transactional
+    public Comment findCommentById(Long commentId) {
+        return commentRepository.findById(commentId).orElseThrow(() -> new MyException(ErrorCode.INVALID_COMMENT_ID));
+    }
+
+    @Transactional
     public void deleteById(Long commentId) {
-        commentRepository.findById(commentId).orElseThrow(() ->  new EmptyException(ErrorCode.INVALID_COMMENT_ID));
+        findCommentById(commentId);
         commentRepository.deleteById(commentId);
     }
 
 
-    private void validateComment(CommentRequestDto commentRequestDto) {
-        if (commentRequestDto.getContent().equals("")) {
-            throw new EmptyException(ErrorCode.EMPTY_COMMENT_CONTENT);
-        }
-    }
 }

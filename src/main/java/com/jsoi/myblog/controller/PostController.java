@@ -5,6 +5,7 @@ import com.jsoi.myblog.repository.PostRepository;
 import com.jsoi.myblog.dto.PostRequestDto;
 import com.jsoi.myblog.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +13,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class PostController {
-    private final PostRepository postRepository;
     private final PostService postService;
 
     @GetMapping("/posts")

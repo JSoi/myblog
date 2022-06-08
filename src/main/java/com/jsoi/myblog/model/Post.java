@@ -3,6 +3,7 @@ package com.jsoi.myblog.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.jsoi.myblog.dto.PostRequestDto;
+import com.jsoi.myblog.valdation.Validator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,6 +32,7 @@ public class Post extends TimeStamped {
     List<Comment> commentList = new ArrayList<>();
 
     public Post(PostRequestDto postRequestDto) {
+        Validator.validatePost(postRequestDto);
         this.author = postRequestDto.getAuthor();
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
