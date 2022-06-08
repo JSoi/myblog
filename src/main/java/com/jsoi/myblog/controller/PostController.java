@@ -1,14 +1,16 @@
 package com.jsoi.myblog.controller;
 
-import com.jsoi.myblog.model.Post;
-import com.jsoi.myblog.repository.PostRepository;
 import com.jsoi.myblog.dto.PostRequestDto;
+import com.jsoi.myblog.exception.ErrorCode;
+import com.jsoi.myblog.exception.MyException;
+import com.jsoi.myblog.model.Post;
 import com.jsoi.myblog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -23,9 +25,13 @@ public class PostController {
     }
 
 
-    @GetMapping("/posts/{postId}")
-    public Post getSpecificPost(@PathVariable Long postId) {
-        return postService.findById(postId);
+    //    @GetMapping("/posts/{postId:[0-9]*}")
+    @GetMapping("/posts/{postId:[0-9]*}")
+    public Post getSpecificPost(@PathVariable Optional<Long> postId) {
+
+        if (postId.isEmpty(()-> new MyException(ErrorCode.EMPTY_POST_AUTHOR); ))
+            return postService.findById(postId.get());
+        else
     }
 
 
@@ -34,12 +40,12 @@ public class PostController {
         return postService.create(postRequestDto);
     }
 
-    @PutMapping("/posts/{postId}")
+    @PutMapping("/posts/{postId:[0-9]*}")
     public Long editPost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto) {
         return postService.update(postId, postRequestDto);
     }
 
-    @DeleteMapping("/posts/{postId}")
+    @DeleteMapping("/posts/{postId:[0-9]*}")
     public Long deletePost(@PathVariable Long postId) {
         postService.delete(postId);
         return postId;
