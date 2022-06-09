@@ -4,6 +4,7 @@ import com.jsoi.myblog.dto.PostRequestDto;
 import com.jsoi.myblog.exception.ErrorCode;
 import com.jsoi.myblog.exception.MyException;
 import com.jsoi.myblog.model.Post;
+import com.jsoi.myblog.repository.PostRepository;
 import com.jsoi.myblog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -25,13 +26,9 @@ public class PostController {
     }
 
 
-    //    @GetMapping("/posts/{postId:[0-9]*}")
     @GetMapping("/posts/{postId:[0-9]*}")
-    public Post getSpecificPost(@PathVariable Optional<Long> postId) {
-
-        if (postId.isEmpty(()-> new MyException(ErrorCode.EMPTY_POST_AUTHOR); ))
-            return postService.findById(postId.get());
-        else
+    public Post getSpecificPost(@PathVariable Long postId) {
+        return postService.findById(postId);
     }
 
 
